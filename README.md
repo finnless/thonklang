@@ -26,3 +26,13 @@ Examples:
 > interpreter.visit(parser.parse("🤔 1 + 1 3 😅 4"))
 4
 ```
+
+
+### For Loops
+
+For loops accept arbitrary expressions inside of range() instead of only a fixed constant.
+
+```
+> interpreter.visit(parser.parse("a=10; for i in range(a) { a = a - 1 }"))
+0
+```
