@@ -55,7 +55,7 @@ grammar = esolang.level0_arithmetic.grammar + r"""
 
     if_statement: "🤔" condition start "😅" start
 
-    # 0 is True, everything else is False
+    # 1 is True, everything else is False
     ?condition: start
 
     block: "{" start* "}"
@@ -92,13 +92,13 @@ class Interpreter(esolang.level0_arithmetic.Interpreter):
     Traceback (most recent call last):
         ...
     ValueError: Variable c undefined
-    >>> interpreter.visit(parser.parse("🤔 0 1 😅 2"))
-    1
     >>> interpreter.visit(parser.parse("🤔 1 1 😅 2"))
+    1
+    >>> interpreter.visit(parser.parse("🤔 0 1 😅 2"))
     2
-    >>> interpreter.visit(parser.parse("a = 0; 🤔 a 5 😅 10"))
+    >>> interpreter.visit(parser.parse("a = 1; 🤔 a 5 😅 10"))
     5
-    >>> interpreter.visit(parser.parse("🤔 1 + 1 3 😅 4"))
+    >>> interpreter.visit(parser.parse("🤔 1 - 1 3 😅 4"))
     4
     '''
     def __init__(self):
@@ -120,7 +120,7 @@ class Interpreter(esolang.level0_arithmetic.Interpreter):
     
     def if_statement(self, tree):
         condition = self.visit(tree.children[0])
-        if condition == 0:
+        if condition == 1:
             # true branch
             return self.visit(tree.children[1])
         else:
