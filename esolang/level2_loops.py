@@ -4,8 +4,11 @@ import esolang.level1_statements
 
 grammar = esolang.level1_statements.grammar + r"""
     %extend start: forloop
+        | whileloop
 
     forloop: "for" NAME "in" range block
+
+    whileloop: "while" condition block
 
     range: "range" "(" start ")"
 """
@@ -25,9 +28,13 @@ class Interpreter(esolang.level1_statements.Interpreter):
     Traceback (most recent call last):
         ...
     ValueError: Variable i undefined
-    # new tests
     >>> interpreter.visit(parser.parse("a=10; for i in range(a) { a = a - 1 }"))
     0
+    >>> interpreter.visit(parser.parse("a=0; while a { a = 1 }"))
+    1
+    >>> interpreter.visit(parser.parse("a=1; while a { a = 0 }"))
+    >>> interpreter.visit(parser.parse("a=0; b=0; while a { b = b + 1; 🤔 b - 3 a = 1 😅 a = 0; }; b"))
+    3
     '''
     def range(self, tree):
         return range(self.visit(tree.children[0]))
@@ -39,5 +46,15 @@ class Interpreter(esolang.level1_statements.Interpreter):
         for x in xs:
             self.stack[-1][varname] = x
             result = self.visit(tree.children[2])
+        self.stack.pop()
+        return result
+
+    def whileloop(self, tree):
+        self.stack.append({})
+        result = None
+        condition = self.visit(tree.children[0])
+        while condition == 0:
+            result = self.visit(tree.children[1])
+            condition = self.visit(tree.children[0])
         self.stack.pop()
         return result
