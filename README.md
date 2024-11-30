@@ -2,6 +2,8 @@
 
 Thonklang is a simple esolang for experimenting with different syntax and semantics of programming languages. It directly references the main control flow operator (🤔).
 
+More information is availible on the [Thonklang entry of the esolangs wiki](https://esolangs.org/wiki/Thonklang).
+
 ## Examples
 
 
@@ -79,9 +81,6 @@ The following code is a demo of how to use functions to find prime numbers.
 0
 > interpreter.visit(parser.parse("is_divisible(9, 3)"))
 1
-```
-
-```
 > interpreter.visit(parser.parse("is_prime = lambda n: { result = 1; 🤔 n 0 😅 { for i in range(n-2) { d = i + 2; 🤔 is_divisible(n,d) { result = 0;  } 😅 { result = result; }; }; }; result };"))
 > interpreter.visit(parser.parse("is_prime(1)"))
 0
@@ -92,9 +91,7 @@ The following code is a demo of how to use functions to find prime numbers.
 > interpreter.visit(parser.parse("is_prime(7)"))
 1
 > interpreter.visit(parser.parse("is_prime(8)"))
-```
-
-```
+0
 > interpreter.visit(parser.parse("find_primes = lambda n: { for i in range(n-1) { num = i + 2; 🤔 is_prime(num) { print(num); } 😅 0; }; };"))
 > interpreter.visit(parser.parse("find_primes(50)"))
 2
