@@ -68,8 +68,6 @@ class Interpreter(esolang.level2_loops.Interpreter):
     0
     >>> interpreter.visit(parser.parse("is_divisible(7, 4)"))
     0
-    # is_prime = lambda n: { result = 1; for i in range(n-2) { d = i + 2; 🤔 is_divisible(n,d) { result = 0; } 😅 { result = result; }; }; result };
-
     >>> is_prime_func_str = clean_code("""
     ... is_prime = lambda n: {
     ...     result = 1;  # Assume prime until proven otherwise
@@ -103,6 +101,10 @@ class Interpreter(esolang.level2_loops.Interpreter):
     # TODO is_prime(2) and 1 is broken
     # >>> interpreter.visit(parser.parse("is_prime(2)"))
     # 1
+    # TODO REMOVE
+    # is_prime = lambda n: { result = 1; for i in range(n-2) { d = i + 2; 🤔 is_divisible(n,d) { result = 0; } 😅 { result = result; }; }; result };
+    # v2
+    # is_prime = lambda n: { 🤔 n 0 😅 result = 1; for i in range(n-2) { d = i + 2; 🤔 is_divisible(n,d) { result = 0; } 😅 { result = result; }; }; result };
     def __init__(self):
         super().__init__()
 
