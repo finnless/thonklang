@@ -70,8 +70,8 @@ class Interpreter(esolang.level2_loops.Interpreter):
     0
     >>> is_prime_func_str = clean_code("""
     ... is_prime = lambda n: {
-    ...     result = 1;  # Assume prime until proven otherwise
     ...     🤔 n 0 😅 {  # If n == 1 (since 1 is true)
+    ...         result = 1;  # Assume prime until proven otherwise
     ...         for i in range(n-2) {
     ...             d = i + 2;  # Makes d go from 2 to n-1
     ...             🤔 is_divisible(n,d) {
@@ -80,13 +80,13 @@ class Interpreter(esolang.level2_loops.Interpreter):
     ...                 result = result;  # No divisor found yet
     ...             };
     ...         };
-    ...     };
-    ...     result
+    ...         result
+    ...     }
     ... };
     ... """)
     >>> interpreter.visit(parser.parse(is_prime_func_str))
     >>> interpreter.visit(parser.parse("is_prime(1)"))
-    1
+    0
     >>> interpreter.visit(parser.parse("is_prime(2)"))
     1
     >>> interpreter.visit(parser.parse("is_prime(3)"))
