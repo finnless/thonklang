@@ -1,10 +1,25 @@
-# esolang ![](https://github.com/finnless/esolang/workflows/tests/badge.svg)
+# Thonklang ![](https://github.com/finnless/thonklang/workflows/tests/badge.svg)
 
-A simple esolang for experimenting with different syntax and semantics of programming languages.
+Thonklang is a simple esolang for experimenting with different syntax and semantics of programming languages. It directly references the main control flow operator (🤔).
+
+## Examples
 
 
+### Truth Machine
+```
+truth = lambda n: {
+    🤔 n {
+        # If input is 1, enter infinite loop
+        while 1 {
+            print(1);
+        };
+    } 😅 {
+        # If input is 0, print once and terminate
+        print(0);
+    };
+};
+```
 
-## Example Test Cases
 
 ### If Statements
 
