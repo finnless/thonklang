@@ -103,9 +103,34 @@ class Interpreter(esolang.level2_loops.Interpreter):
     1
     >>> interpreter.visit(parser.parse("is_prime(15)"))
     0
+    >>> find_primes_func_str = clean_code("""
+    ... find_primes = lambda n: {
+    ...     for i in range(n-1) {  # Will loop from 0 to n-2
+    ...         num = i + 2;       # Makes num go from 2 to n
+    ...         🤔 is_prime(num) {
+    ...             print(num);    # Print each prime number we find
+    ...         } 😅 0;
+    ...     };
+    ... };
+    ... """)
+    >>> interpreter.visit(parser.parse(find_primes_func_str))
+    >>> interpreter.visit(parser.parse("find_primes(50)"))
+    2
+    3
+    5
+    7
+    11
+    13
+    17
+    19
+    23
+    29
+    31
+    37
+    41
+    43
+    47
     '''
-   # TODO REMOVE
-    # is_prime = lambda n: { result = 1; 🤔 n 0 😅 { for i in range(n-2) { d = i + 2; 🤔 is_divisible(n,d) { result = 0;  } 😅 { result = result; }; }; }; result };
     def __init__(self):
         super().__init__()
 

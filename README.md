@@ -50,3 +50,51 @@ For loops accept arbitrary expressions inside of range() or a fixed constant.
 > interpreter.visit(parser.parse("a=1; b=0; while a { b = b + 1; 🤔 b - 2 a = 0 😅 a = 1; }; b"))
 3
 ```
+
+
+### Functions: Prime Numbers Demo
+
+The following code is a demo of how to use functions to find prime numbers.
+
+```
+> interpreter.visit(parser.parse("is_divisible = lambda n,d: 🤔 n - ((n/d) * d) + 1 1 😅 0;"))
+> interpreter.visit(parser.parse("is_divisible(10, 2)"))
+1
+> interpreter.visit(parser.parse("is_divisible(10, 3)"))
+0
+> interpreter.visit(parser.parse("is_divisible(9, 3)"))
+1
+```
+
+```
+> interpreter.visit(parser.parse("is_prime = lambda n: { result = 1; 🤔 n 0 😅 { for i in range(n-2) { d = i + 2; 🤔 is_divisible(n,d) { result = 0;  } 😅 { result = result; }; }; }; result };"))
+> interpreter.visit(parser.parse("is_prime(1)"))
+0
+> interpreter.visit(parser.parse("is_prime(2)"))
+1
+> interpreter.visit(parser.parse("is_prime(3)"))
+1
+> interpreter.visit(parser.parse("is_prime(7)"))
+1
+> interpreter.visit(parser.parse("is_prime(8)"))
+```
+
+```
+> interpreter.visit(parser.parse("find_primes = lambda n: { for i in range(n-1) { num = i + 2; 🤔 is_prime(num) { print(num); } 😅 0; }; };"))
+> interpreter.visit(parser.parse("find_primes(50)"))
+2
+3
+5
+7
+11
+13
+17
+19
+23
+29
+31
+37
+41
+43
+47
+```
