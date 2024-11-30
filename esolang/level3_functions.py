@@ -71,18 +71,24 @@ class Interpreter(esolang.level2_loops.Interpreter):
     >>> is_prime_func_str = clean_code("""
     ... is_prime = lambda n: {
     ...     result = 1;  # Assume prime until proven otherwise
-    ...     for i in range(n-2) {
-    ...         d = i + 2;  # Makes d go from 2 to n-1
-    ...         🤔 is_divisible(n,d) {
-    ...             result = 0;  # Found a divisor, not prime
-    ...         } 😅 {
-    ...             result = result;  # No divisor found yet
+    ...     🤔 n 0 😅 {  # If n == 1 (since 1 is true)
+    ...         for i in range(n-2) {
+    ...             d = i + 2;  # Makes d go from 2 to n-1
+    ...             🤔 is_divisible(n,d) {
+    ...                 result = 0;  # Found a divisor, not prime
+    ...             } 😅 {
+    ...                 result = result;  # No divisor found yet
+    ...             };
     ...         };
     ...     };
     ...     result
     ... };
     ... """)
     >>> interpreter.visit(parser.parse(is_prime_func_str))
+    >>> interpreter.visit(parser.parse("is_prime(1)"))
+    1
+    >>> interpreter.visit(parser.parse("is_prime(2)"))
+    1
     >>> interpreter.visit(parser.parse("is_prime(3)"))
     1
     >>> interpreter.visit(parser.parse("is_prime(7)"))
@@ -98,13 +104,8 @@ class Interpreter(esolang.level2_loops.Interpreter):
     >>> interpreter.visit(parser.parse("is_prime(15)"))
     0
     '''
-    # TODO is_prime(2) and 1 is broken
-    # >>> interpreter.visit(parser.parse("is_prime(2)"))
-    # 1
-    # TODO REMOVE
-    # is_prime = lambda n: { result = 1; for i in range(n-2) { d = i + 2; 🤔 is_divisible(n,d) { result = 0; } 😅 { result = result; }; }; result };
-    # v2
-    # is_prime = lambda n: { 🤔 n 0 😅 result = 1; for i in range(n-2) { d = i + 2; 🤔 is_divisible(n,d) { result = 0; } 😅 { result = result; }; }; result };
+   # TODO REMOVE
+    # is_prime = lambda n: { result = 1; 🤔 n 0 😅 { for i in range(n-2) { d = i + 2; 🤔 is_divisible(n,d) { result = 0;  } 😅 { result = result; }; }; }; result };
     def __init__(self):
         super().__init__()
 
