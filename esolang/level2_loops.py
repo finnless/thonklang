@@ -30,6 +30,7 @@ class Interpreter(esolang.level1_statements.Interpreter):
     ValueError: Variable i undefined
     >>> interpreter.visit(parser.parse("a=10; for i in range(a) { a = a - 1 }"))
     0
+    >>> interpreter.visit(parser.parse("for i in range(0) { }"))
     >>> interpreter.visit(parser.parse("a=1; while a { a = 0 }"))
     0
     >>> interpreter.visit(parser.parse("a=0; while a { a = 1 }"))
@@ -44,6 +45,7 @@ class Interpreter(esolang.level1_statements.Interpreter):
         varname = tree.children[0].value
         xs = self.visit(tree.children[1])
         self.stack.append({})
+        result = None
         for x in xs:
             self.stack[-1][varname] = x
             result = self.visit(tree.children[2])
